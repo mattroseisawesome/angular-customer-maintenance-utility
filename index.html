@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Customer Administration App</title>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link href="style/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="style/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="style/main.css" rel="stylesheet" type="text/css" />
+</head>
+<body ng-app="customerAdminApp" ng-controller="customerAppController">
+    <div id="parent" class="row">
+    <header class="col-xs-12">
+        <h1>Customer Administration App</h1>
+    </header>
+    <div id="content" class="col-xs-12">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <h2>Customer Info</h2>
+                        <form ng-submit="addNew(customerDetail)" name="addUser" id="add-user">
+                            <div class="controls">
+                                <label for="emailAddress" class="control-label">Email Address: <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
+                                <div>
+                                    <span class="email-container">
+                                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                        <input type="email" class="form-control" placeholder="ex. john.jones@mars.pl" name="emailAddress" id="emailAddress" ng-model="customerDetails.emailAddress" aria-required="true" ng-required="true" required />
+                                    </span>
+
+                                    <label for="emailAddress" class="error-container" ng-show="addUser.emailAddress.$error" ng-hide="addUser.emailAddress.$valid" role="alert">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        <span ng-show="addUser.emailAddress.$error.required" class="error">Email Address is required.</span>
+                                        <span ng-show="addUser.emailAddress.$invalid" class="error">Please enter a valid Email Address.</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="controls">
+                                <label for="firstName" class="control-label">First Name: <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
+                                <div>
+                                    <input type="text" class="form-control" ng-model="customerDetail.firstName" ng-minlength="2" name="firstName" id="firstName" aria-required="true" ng-required="true" required />
+                                    <label for="firstName" class="error-container" ng-show="addUser.firstName.$error" ng-hide="addUser.firstName.$valid" role="alert">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        <span ng-show="addUser.firstName.$error.required" class="error">First Name is Required</span>
+                                        <span ng-show="addUser.firstName.$error.minlength" class="error">You must enter at least 2 characters</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="controls">
+                                <label for="lastName" class="control-label">Last Name: <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
+                                <div>
+                                    <input type="text" class="form-control" ng-model="customerDetail.lastName" ng-minlength="2" name="lastName" id="lastName" aria-required="true" ng-required="true" required />
+                                    <label for="lastName" class="error-container" ng-show="addUser.lastName.$error" ng-hide="addUser.lastName.$valid" role="alert">
+                                        <i class="fa fa-exclamation-circle"></i>
+                                        <span ng-show="addUser.lastName.$error.required" class="error">Last Name is required.</span>
+                                        <span ng-show="addUser.lastName.$error.minlength" class="error">You must enter at least 2 characters.</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="controls">
+                                <label for="phoneNumber" class="control-label">Phone Number:</label>
+                                <div>
+                                    <span class="phone-container">
+                                        <i class="fa fa-phone" aria-hidden="true"></i>
+                                        <input type="text" class="form-control" placeholder="ex. 800-555-2638" ng-model="customerDetail.phoneNumber" id="phoneNumber" name="phoneNumber" aria-required="false" ng-required="false" /> 
+                                    </span>
+                                </div>                                 
+                            </div>
+                            <div class="controls">
+                                <label for="streetAddress" class="control-label">Street Address:</label>
+                                <div>
+                                    <input type="text" class="form-control" placeholder="ex. 123 Street Ln" ng-model="customerDetail.streetAddress" id="streetAddress" name="streetAddress" aria-required="false" ng-required="false" />
+                                </div>                                 
+                            </div>                            
+                            <div class="clearfix">
+                                <span ng-show="addUser.$pristine">
+                                    <button type="submit" class="btn btn-primary disabled addnew" disabled>
+                                        <i class="fa fa-plus"></i> Add New Customer
+                                    </button>
+                                </span>
+                                <span ng-show="addUser.$dirty">
+                                    <button type="submit" class="btn btn-primary addnew">
+                                        <i class="fa fa-plus"></i> Add New Customer
+                                    </button>
+                                </span>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <form name="customerTable" id="customer-table">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th><input type="checkbox" ng-model="customerDetail.selected" ng-click="checkAll()" ng-checked="selectAll" /></th>
+                                        <th>Email Address</th>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Phone Number</th>
+                                        <th>Street Address</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="customerDetail in customerDetails track by $index" ng-form name="innerForm">
+                                        <td class="checkbox-row"><input type="checkbox" ng-checked="customerDetail.selected" ng-click="report(customerDetail, $index)" /></td>
+                                        <td class="email-row">
+                                            <label>
+                                                <strong>Email</strong>
+                                                <span class="email-container">
+                                                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                                    <input type="email" class="form-control" ng-model="customerDetail.emailAddress" name="emailAddress" ng-required="true" />
+                                                </span>
+                                            </label>
+                                            
+                                            <label class="error-container" ng-show="innerForm.emailAddress.$error" ng-hide="innerform.emailAddress.$valid" role="alert">
+                                                <i></i>
+                                                <span ng-show="innerForm.emailAddress.$error.required" class="error">Email Address is required.</span>
+                                                <span ng-show="innerForm.emailAddress.$invalid" class="error">Please enter a valid Email Address.</span>
+                                            </label>
+                                        </td>
+                                        <td class="first-name-row">
+                                            <label>
+                                                <strong>First Name</strong>
+                                                <input type="text" class="form-control" ng-model="customerDetail.firstName" name="firstName" ng-required="true" />
+                                            </label>
+                                            <span class="error-container" ng-show="innerForm.firstName.$error.required"><i></i><label class="error">Please enter the First Name</label></span>           
+                                        </td>
+                                        <td class="last-name-row">
+                                            <label>
+                                                <strong>Last Name</strong>
+                                                <input type="text" class="form-control" ng-model="customerDetail.lastName" name="lastName" ng-required="true" />
+                                            </label>
+                                            <span class="error-container" ng-show="innerForm.lastName.$error.required"><i></i><label class="error">Please enter the Last Name</label></span>                                            
+                                        </td>
+                                        <td class="phone-row">
+                                            <label>
+                                                <strong>Phone #</strong>
+                                                <span class="phone-container">
+                                                    <i class="fa fa-phone" aria-hidden="true"></i>
+                                                    <input type="text" class="form-control" ng-model="customerDetail.phoneNumber" name="phoneNumber" />
+                                                </span>
+                                            </label>
+                                        </td>
+                                        <td class="street-address-row">
+                                            <label>
+                                                <strong>Street Addr</strong>
+                                                <input type="text" class="form-control" ng-model="customerDetail.streetAddress" name="streetAddress" />
+                                            </label>
+                                        </td>
+                                        <td class="save-row">
+                                            <button class="btn btn-success save-button" type="button" ng-disabled="innerForm.$pristine" ng-click="innerForm.$valid && save($index)"><i class="fa fa-check"></i></button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="form-group">
+                                <span ng-show="customerTable.$pristine">
+                                    <button type="button" class="btn btn-danger disabled" disabled><i class="fa fa-minus"></i> Remove Customer(s)</button> 
+                                </span>
+                                <span ng-show="customerTable.$dirty">
+                                    <button type="button" class="btn btn-danger" ng-click="remove()"><i class="fa fa-minus"></i> Remove Customer(s)</button> 
+                                </span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="col-xs-12">
+        <p>Example project of a single page app utilizing AngularJS, allowing a user to view, add, edit and delete user information with data persistence.</p>
+        <p>Written by <a href='mailto:&#109;&#097;&#116;&#116;&#046;&#114;&#111;&#115;&#101;&#046;&#101;&#109;&#097;&#105;&#108;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;?subject=Hello%20Mr.%20Thompson&amp;body=Ugggh%20Now%20when%20I%20say%20"Hello%20Mr.%20Thompson"%20and%20press%20down%20on%20your%20foot,%20you%20smile%20and%20nod'>Matt Rose</a></p>
+        <!-- if that mailto stuff doesn't make sense, this will probably help: https://www.youtube.com/watch?v=lfft9Jx9gJk -->
+    </footer>
+</div>
+
+<script src="js/angular.min.js"></script>
+<script src="app/table.local.js"></script>
+<script>
+//$(function(){
+
+//	$.validator.setDefaults({
+//		submitHandler: function() {
+//			console.log("new record added!");
+//		}
+//	});
+//	$("#customer-table").validate({
+//        errorPlacement:function(label, element){
+//                label.addClass("error-container");
+//                label.insertAfter(element);
+//                label.prepend("<i></i>");
+//        },
+//        wrapper:"span",
+//        rules: {
+//            emailAddress: {
+//                required : true,
+//                email : true
+//            },
+//            firstName: "required",
+//            lastName: "required"
+//
+//        },
+//        messages: {
+//            emailAddress: "Please enter a valid email address",
+//            firstName: {
+//                required : "Please enter the First Name",
+//                minlength : 2
+//            },
+//            lastName: {
+//                required : "Please enter the Last Name",
+//                minlength : 2
+//            }       
+//        }
+//    });
+//    
+//    /*validate form on keyup and submit events*/
+//	$("#add-user").validate({
+//        errorPlacement:function(label, element){
+//                label.addClass("error-container");
+//                label.insertAfter(element);
+//                label.prepend("<i></i>");
+//        },
+//        wrapper:"span",
+//        rules: {
+//            emailAddress: {
+//                required : true,
+//                email : true
+//            },
+//            firstName: "required",
+//            lastName: "required"
+//
+//        },
+//        messages: {
+//            emailAddress: "Please enter a valid email address",
+//            firstName: {
+//                required : "Please enter the First Name",
+//                minlength : 2
+//            },
+//            lastName: {
+//                required : "Please enter the Last Name",
+//                minlength : 2
+//            }       
+//        }
+//    });
+//});
+</script>
+</body>
+</html>
