@@ -1,10 +1,7 @@
 ###  How to run this project
 
-It's pretty easily, honestly!
+It's pretty easy, honestly!
 
-1) Unpackage this in the root of your application server.  The directory should be "angular-customer-maintenance-utility-master", unless something really went sideways.
-2) Once unpacked, just dump her on in the ole %DocumentRoot%.  Assuming your app server is running, fire up Mosiac or whatever it is the kids use these days to browse the internet world wide web page sites.  Assuming you have domain indexing set up (which, why wouldn't you, it's not the Dark Ages), append /angular-customer-maintenance-utility-master to the url 
-   for your server.  It should like something like http://your-server-here/angular-customer-maintenance-utility-master.
-3) Once you are able to view the application, you'll see you have the ability to add new records and edit (or delete) current customer records.
-
-All resources utilized in this application are free as in speech and free as in beer.  The fonts (Metropolis, FontAwesome) are available under the SIL Open Font License.
+1) Unpack this in the root of your application server.  The directory should be "angular-customer-maintenance-utility-master", unless something really went sideways.
+2) Once unpacked, just dump her on in the ole %DocumentRoot%.  Assuming your app server is running, fire up Mosiac or whatever it is the kids use these days to browse the internet world wide web page sites.  Assuming you have domain indexing set up, append /angular-customer-maintenance-utility-master to the url for your server.  It should like something like http://your-server-here/angular-customer-maintenance-utility-master.  If you want to virtual host this sumbitch, be my guest.
+3) Once you are able to view the application, you'll see you have the ability to add new records and edit (or delete) current customer records.  All resources utilized in this application are free as in speech and free as in beer.  The fonts (Metropolis, FontAwesome) are available under the SIL Open Font License.
