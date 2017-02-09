@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link href="./dist/css/font-awesome/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <link href="./dist/css/main.min.css" rel="stylesheet" type="text/css" />
+    <script src="./dist/js/app.min.js"></script>
+    <script src="./app/table.local.js"></script>
 </head>
 <body ng-app="customerAdminApp" ng-controller="customerAppController">
     <div id="parent" class="row">
@@ -25,10 +27,10 @@
                                 <div>
                                     <span class="email-container">
                                         <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                        <input type="email" class="form-control" placeholder="ex. john.jones@mars.pl" name="emailAddress" id="emailAddress" ng-model="customerDetails.emailAddress" aria-required="true" ng-required="true" required />
+                                        <input type="email" class="form-control" placeholder="ex. john.jones@mars.pl" name="emailAddress" id="emailAddress" ng-model="customerDetail.emailAddress" aria-required="true" ng-required="true" required />
                                     </span>
 
-                                    <label for="emailAddress" class="error-container" ng-show="addUser.emailAddress.$error && addUser.emailAddress.$touched" ng-hide="addUser.emailAddress.$valid || addUser.emailAddress.$pristine || addUser.emailAddress.$untouched" role="alert">
+                                    <label for="emailAddress" class="error-container" ng-show="addUser.emailAddress.$error && addUser.emailAddress.$toucheds" ng-hide="addUser.emailAddress.$valid || addUser.emailAddress.$pristine || addUser.emailAddress.$untouched" role="alert">
                                         <i class="fa fa-exclamation-circle"></i>
                                         <span ng-show="addUser.emailAddress.$error.required" class="error">Email Address is required.</span>
                                         <span ng-show="addUser.emailAddress.$invalid" class="error">Please enter a valid Email Address.</span>
@@ -39,7 +41,7 @@
                                 <label for="firstName" class="control-label">First Name: <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
                                 <div>
                                     <input type="text" class="form-control" ng-model="customerDetail.firstName" ng-minlength="2" name="firstName" id="firstName" aria-required="true" ng-required="true" required />
-                                    <label for="firstName" class="error-container" ng-show="addUser.firstName.$error && addUser.firstName.$touched" ng-hide="addUser.firstName.$valid || addUser.emailAddress.$pristine || addUser.firstName.$untouched" role="alert">
+                                    <label for="firstName" class="error-container" ng-show="addUser.firstName.$error || addUser.firstName.$invalid" ng-hide="addUser.firstName.$valid || addUser.emailAddress.$pristine || addUser.firstName.$untouched" role="alert">
                                         <i class="fa fa-exclamation-circle"></i>
                                         <span ng-show="addUser.firstName.$error.required" class="error">First Name is Required</span>
                                         <span ng-show="addUser.firstName.$error.minlength" class="error">You must enter at least 2 characters</span>
@@ -50,7 +52,7 @@
                                 <label for="lastName" class="control-label">Last Name: <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
                                 <div>
                                     <input type="text" class="form-control" ng-model="customerDetail.lastName" ng-minlength="2" name="lastName" id="lastName" aria-required="true" ng-required="true" required />
-                                    <label for="lastName" class="error-container" ng-show="addUser.lastName.$error && addUser.lastName.$touched" ng-hide="addUser.lastName.$valid || addUser.emailAddress.$pristine || addUser.lastName.$untouched" role="alert">
+                                    <label for="lastName" class="error-container" ng-show="addUser.lastName.$error || addUser.lastName.$invalid" ng-hide="addUser.lastName.$valid || addUser.emailAddress.$pristine || addUser.lastName.$untouched" role="alert">
                                         <i class="fa fa-exclamation-circle"></i>
                                         <span ng-show="addUser.lastName.$error.required" class="error">Last Name is required.</span>
                                         <span ng-show="addUser.lastName.$error.minlength" class="error">You must enter at least 2 characters.</span>
@@ -117,8 +119,8 @@
                                                 </span>
                                             </label>
                                             
-                                            <label class="error-container" ng-show="innerForm.emailAddress.$invalid || customerDetail.emailAddress.$touched" ng-show="innerForm.emailAddress.$valid || customerDetail.emailAddress.$untouched" role="alert">
-                                                <i></i>
+                                            <label class="error-container" ng-show="innerForm.emailAddress.$invalid || innerForm.emailAddress.$touched" ng-hide="innerForm.emailAddress.$valid || innerForm.emailAddress.$untouched" role="alert">
+                                                <i class="fa fa-exclamation-circle"></i>
                                                 <span ng-show="innerForm.emailAddress.$error.required" class="error">Email Address is required.</span>
                                                 <span ng-show="innerForm.emailAddress.$invalid" class="error">Please enter a valid Email Address.</span>
                                             </label>
@@ -180,7 +182,6 @@
     </footer>
 </div>
 
-<script src="./dist/js/app.min.js"></script>
-<script src="./app/table.local.js"></script>
+
 </body>
 </html>

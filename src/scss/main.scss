@@ -103,6 +103,11 @@ i.required{
     padding:5px 15px 5px 30px;
     position:relative;
     vertical-align: middle;
+    & i:before{
+        position:absolute;
+        top: 3px;
+        left:3px;
+    }
     & i::after{
         content:"";
         background:transparent;
