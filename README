@@ -1,7 +1,0 @@
-Make sure you have gulp, gulp-sass, gulp-cssmin, gulp-rename, gulp-autoprefixer, gulp-uglify, gulp-concat, gulp-imagemin, and browser-sync installed.  If not, maybe visit https://docs.npmjs.com/getting-started/installing-npm-packages-locally if you have questions?
-
-Anyway, after verifying you have everything, grab the project and run gulp. Voilà.
-
-Once you are able to view the application, you'll see you have the ability to add new records and edit (or delete) current customer records.  All resources utilized in this application are free as in speech and free as in beer.  
-
-The fonts (Metropolis, FontAwesome) are available under the SIL Open Font License.
