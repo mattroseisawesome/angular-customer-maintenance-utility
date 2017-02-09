@@ -1,13 +1,4 @@
-/*Fonts obtained from Font Squirrel { https://www.fontsquirrel.com/fonts/metropolis } */
-@font-face{font-family:'Metropolis Regular';src:url('../fonts/metropolis-regular-webfont.eot');src:url('../fonts/metropolis-regular-webfont.eot?#iefix') format('embedded-opentype'),url('../fonts/metropolis-regular-webfont.woff') format('woff'),url('../fonts/metropolis-regular-webfont.ttf') format('truetype'),url('../fonts/metropolis-regular-webfont.svg#metropolisExtraRegular') format('svg');font-weight:normal;font-style:normal;}
-
-@font-face{font-family:'Metropolis Medium';src:url('../fonts/metropolis-medium-webfont.eot');src:url('../fonts/metropolis-medium-webfont.eot?#iefix') format('embedded-opentype'),url('../fonts/metropolis-medium-webfont.woff') format('woff'),url('../fonts/metropolis-medium-webfont.ttf') format('truetype'),url('../fonts/metropolis-medium-webfont.svg#metropolisExtraRegular') format('svg');font-weight:normal;font-style:normal;}
-
-@font-face{font-family:'Metropolis Semibold';src:url('../fonts/metropolis-semibold-webfont.eot');src:url('../fonts/metropolis-semibold-webfont.eot?#iefix') format('embedded-opentype'),url('../fonts/metropolis-semibold-webfont.woff') format('woff'),url('../fonts/metropolis-semibold-webfont.ttf') format('truetype'),url('../fonts/metropolis-semibold-webfont.svg#metropolisExtraRegular') format('svg');font-weight:normal;font-style:normal;}
-
-@font-face{font-family:'Metropolis Bold';src:url('../fonts/metropolis-bold-webfont.eot');src:url('../fonts/metropolis-bold-webfont.eot?#iefix') format('embedded-opentype'),url('../fonts/metropolis-bold-webfont.woff') format('woff'),url('../fonts/metropolis-bold-webfont.ttf') format('truetype'),url('../fonts/metropolis-bold-webfont.svg#metropolisExtraRegular') format('svg');font-weight:normal;font-style:normal;}
-
-@font-face{font-family:'Metropolis Black';src:url('../fonts/metropolis-black-webfont.eot');src:url('../fonts/metropolis-black-webfont.eot?#iefix') format('embedded-opentype'),url('../fonts/metropolis-black-webfont.woff') format('woff'),url('../fonts/metropolis-black-webfont.ttf') format('truetype'),url('../fonts/metropolis-black-webfont.svg#metropolisExtraRegular') format('svg');font-weight:normal;font-style:normal;}
+@import "_webfonts.scss";
 
 html,body{
     font-weight:normal;
@@ -112,39 +103,41 @@ i.required{
     padding:5px 15px 5px 30px;
     position:relative;
     vertical-align: middle;
-}
-.error-container i::after{
-    content:"";
-    background:transparent;
-    border-left: 7px solid transparent;
-    border-right: 7px solid transparent;
-    border-top: 7px solid transparent;
-    border-bottom: 7px solid rgb(215, 0, 0);
-    display: block;
-    height: 7px;
-    position: absolute;
-    top: -18px;
-    left: 7px;
-    width: 7px;
+    & i::after{
+        content:"";
+        background:transparent;
+        border-left: 7px solid transparent;
+        border-right: 7px solid transparent;
+        border-top: 7px solid transparent;
+        border-bottom: 7px solid rgb(215, 0, 0);
+        display: block;
+        height: 7px;
+        position: absolute;
+        top: -18px;
+        left: 7px;
+        width: 7px;
 
-}
+    }
 
 
-.error-container span{
-    display:block;
-}
+    & span{
+        display:block;
+    }
 
-.error-container i{
-    content:"\f06a";
-    display:inline-block;
-    font-family:"FontAwesome";
-    font-size:1.12em;
-    font-weight:normal;
-    height:10px;
-    position:absolute;
-    top:4px;
-    left:6px;
-    width:10px;
+    & i{
+        content:"\f06a";
+        display:inline-block;
+        font-family:"FontAwesome";
+        font-size:1.12em;
+        font-weight:normal;
+        height:10px;
+        position:absolute;
+        top:4px;
+        left:6px;
+        width:10px;
+    }
+
+
 }
 
 .error{
@@ -162,9 +155,7 @@ i.required{
 .email-container,.phone-container{
     display:block;
     overflow:hidden;
-}
-
-.email-container i,.phone-container i{
+    & i{
     background-color:rgb(244,244,244);
     border-width:1px 0 1px 1px;
     border-style:solid;
@@ -178,13 +169,15 @@ i.required{
     height:34px;
     text-align: center;
     vertical-align: middle;
+    }
+
+    & input{
+        border-radius:0 4px 4px 0;
+        float:left;
+        width:calc(100% - 34px);
+    }
 }
 
-.email-container input,.phone-container input{
-    border-radius:0 4px 4px 0;
-    float:left;
-    width:calc(100% - 34px);
-}
 
 .email-container i{
     line-height:28px;
@@ -194,32 +187,40 @@ i.required{
     line-height:32px;
 }
 
+input{
+    &.form-control{
+        font-family:"Metropolis Regular";
+    }
 
-input.form-control{
-    font-family:"Metropolis Regular";
+    &.error,&.ng-invalid{
+        background:rgba(215,0,0,.4);
+        border:1px solid rgb(215,0,0);
+        color:rgb(215,0,0);
+        &.ng-pristine{
+            background:white;
+            border-color:rgb(204,204,204);
+            
+        }
+    }
+
+    &.valid{
+        background:rgba(0,215,0,.1);
+        border:1px solid rgb(0,215,0);
+    }
+
+    &.form-control + i,&.form-control.error + i{
+        display:none;
+        content:"";
+    }
+
+    &.form-control.valid + i{
+        font-family:"FontAwesome";
+        content:"\f00c";
+        display:block;
+    }
+    
 }
 
-input.error,input.ng-invalid{
-    background:rgba(215,0,0,.4);
-    border:1px solid rgb(215,0,0);
-    color:rgb(215,0,0);
-}
-
-input.valid{
-    background:rgba(0,215,0,.1);
-    border:1px solid rgb(0,215,0);
-}
-
-input.form-control + i,input.form-control.error + i{
-    display:none;
-    content:"";
-}
-
-input.form-control.valid + i{
-    font-family:"FontAwesome";
-    content:"\f00c";
-    display:block;
-}
 
 .btn.btn-primary{
     font-family:"Metropolis Bold";
