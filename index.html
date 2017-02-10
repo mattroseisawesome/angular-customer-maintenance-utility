@@ -30,7 +30,7 @@
                                         <input type="email" class="form-control" placeholder="ex. john.jones@mars.pl" name="emailAddress" id="emailAddress" ng-model="customerDetail.emailAddress" aria-required="true" ng-required="true" required />
                                     </span>
 
-                                    <label for="emailAddress" class="error-container" ng-show="addUser.emailAddress.$error && addUser.emailAddress.$toucheds" ng-hide="addUser.emailAddress.$valid || addUser.emailAddress.$pristine || addUser.emailAddress.$untouched" role="alert">
+                                    <label for="emailAddress" class="error-container" ng-show="addUser.emailAddress.$error && addUser.emailAddress.$touched" ng-hide="addUser.emailAddress.$valid || addUser.emailAddress.$pristine || addUser.emailAddress.$untouched" role="alert">
                                         <i class="fa fa-exclamation-circle"></i>
                                         <span ng-show="addUser.emailAddress.$error.required" class="error">Email Address is required.</span>
                                         <span ng-show="addUser.emailAddress.$invalid" class="error">Please enter a valid Email Address.</span>
@@ -75,12 +75,12 @@
                                 </div>                                 
                             </div>                            
                             <div class="clearfix">
-                                <span ng-show="addUser.$pristine">
+                                   <span ng-show="addUser.$pristine || addUser.$invalid">
                                     <button type="submit" class="btn btn-primary disabled addnew" disabled>
                                         <i class="fa fa-plus"></i> Add New Customer
                                     </button>
                                 </span>
-                                <span ng-show="addUser.$dirty">
+                                <span ng-show="addUser.$dirty && addUser.$valid">
                                     <button type="submit" class="btn btn-primary addnew">
                                         <i class="fa fa-plus"></i> Add New Customer
                                     </button>
@@ -119,7 +119,7 @@
                                                 </span>
                                             </label>
                                             
-                                            <label class="error-container" ng-show="innerForm.emailAddress.$invalid || innerForm.emailAddress.$touched" ng-hide="innerForm.emailAddress.$valid || innerForm.emailAddress.$untouched" role="alert">
+                                            <label class="error-container" ng-show="innerForm.emailAddress.$invalid && innerForm.emailAddress.$touched" ng-hide="innerForm.emailAddress.$valid || innerForm.emailAddress.$untouched" role="alert">
                                                 <i class="fa fa-exclamation-circle"></i>
                                                 <span ng-show="innerForm.emailAddress.$error.required" class="error">Email Address is required.</span>
                                                 <span ng-show="innerForm.emailAddress.$invalid" class="error">Please enter a valid Email Address.</span>
