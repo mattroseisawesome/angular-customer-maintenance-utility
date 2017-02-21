@@ -28,6 +28,7 @@
                                     <span class="email-container">
                                         <i class="fa fa-envelope-o" aria-hidden="true"></i>
                                         <input type="email" class="form-control" placeholder="ex. john.jones@mars.pl" name="emailAddress" id="emailAddress" ng-model="customerDetail.emailAddress" aria-required="true" ng-required="true" required />
+                                        <span class="fa fa-check" ng-show="addUser.emailAddress.$valid"></span>
                                     </span>
 
                                     <label for="emailAddress" class="error-container" ng-show="addUser.emailAddress.$error && addUser.emailAddress.$touched" ng-hide="addUser.emailAddress.$valid || addUser.emailAddress.$pristine || addUser.emailAddress.$untouched" role="alert">
@@ -41,18 +42,26 @@
                                 <label for="firstName" class="control-label">First Name: <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
                                 <div>
                                     <input type="text" class="form-control" ng-model="customerDetail.firstName" ng-minlength="2" name="firstName" id="firstName" aria-required="true" ng-required="true" required />
-                                    <label for="firstName" class="error-container" ng-show="addUser.firstName.$error || addUser.firstName.$invalid" ng-hide="addUser.firstName.$valid || addUser.emailAddress.$pristine || addUser.firstName.$untouched" role="alert">
+                                    <span class="fa fa-check" ng-show="addUser.firstName.$valid"></span>
+
+                                    
+                                    
+                                    <label for="firstName" class="error-container" ng-show="addUser.firstName.$error && addUser.firstName.$touched" ng-hide="addUser.firstName.$valid || addUser.firstName.$pristine || addUser.firstName.$untouched" role="alert">
                                         <i class="fa fa-exclamation-circle"></i>
                                         <span ng-show="addUser.firstName.$error.required" class="error">First Name is Required</span>
                                         <span ng-show="addUser.firstName.$error.minlength" class="error">You must enter at least 2 characters</span>
                                     </label>
+
+                                
+                                
                                 </div>
                             </div>
                             <div class="controls">
                                 <label for="lastName" class="control-label">Last Name: <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
                                 <div>
                                     <input type="text" class="form-control" ng-model="customerDetail.lastName" ng-minlength="2" name="lastName" id="lastName" aria-required="true" ng-required="true" required />
-                                    <label for="lastName" class="error-container" ng-show="addUser.lastName.$error || addUser.lastName.$invalid" ng-hide="addUser.lastName.$valid || addUser.emailAddress.$pristine || addUser.lastName.$untouched" role="alert">
+                                    <span class="fa fa-check" ng-show="addUser.lastName.$valid"></span>
+                                    <label for="lastName" class="error-container" ng-show="addUser.lastName.$error && addUser.lastName.$touched" ng-hide="addUser.lastName.$valid || addUser.lastName.$pristine || addUser.lastName.$untouched" role="alert">
                                         <i class="fa fa-exclamation-circle"></i>
                                         <span ng-show="addUser.lastName.$error.required" class="error">Last Name is required.</span>
                                         <span ng-show="addUser.lastName.$error.minlength" class="error">You must enter at least 2 characters.</span>
@@ -110,12 +119,13 @@
                                 <tbody>
                                     <tr ng-repeat="customerDetail in customerDetails track by $index" ng-form name="innerForm">
                                         <td class="checkbox-row" headers="customer-select-column" role="gridcell"><input type="checkbox" ng-checked="customerDetail.selected" ng-click="report(customerDetail, $index)" /></td>
-                                        <td class="email-row" headers="email-address-column" role="gridcell">
+                                        <td class="email-column" headers="email-address-column" role="gridcell">
                                             <label>
                                                 <strong>Email Address</strong>
                                                 <span class="email-container">
                                                     <i class="fa fa-envelope-o" aria-hidden="true"></i>
                                                     <input type="email" class="form-control" ng-model="customerDetail.emailAddress" name="emailAddress" ng-required="true" />
+                                                    <span class="fa fa-check" ng-show="innerForm.emailAddress.$valid" ng-hide="innerForm.emailAddress.$invalid || innerForm.emailAddress.$pristine"></span>
                                                 </span>
                                             </label>
                                             <label class="error-container" ng-show="innerForm.emailAddress.$invalid && innerForm.emailAddress.$touched" ng-hide="innerForm.emailAddress.$valid || innerForm.emailAddress.$untouched" role="alert">
@@ -124,21 +134,23 @@
                                                 <span ng-show="innerForm.emailAddress.$invalid" class="error">Please enter a valid Email Address.</span>
                                             </label>
                                         </td>
-                                        <td class="first-name-row" headers="first-name-column" role="gridcell">
+                                        <td class="first-name-column" headers="first-name-column" role="gridcell">
                                             <label>
                                                 <strong>First Name</strong>
                                                 <input type="text" class="form-control" ng-model="customerDetail.firstName" name="firstName" ng-required="true" />
+                                                <span class="fa fa-check" ng-show="innerForm.firstName.$valid" ng-hide="innerForm.firstName.$invalid || innerForm.firstName.$pristine"></span>
                                             </label>
                                             <span class="error-container" ng-show="innerForm.firstName.$error.required"><i></i><label class="error">Please enter the First Name</label></span>           
                                         </td>
-                                        <td class="last-name-row" headers="last-name-column" role="gridcell">
+                                        <td class="last-name-column" headers="last-name-column" role="gridcell">
                                             <label>
                                                 <strong>Last Name</strong>
                                                 <input type="text" class="form-control" ng-model="customerDetail.lastName" name="lastName" ng-required="true" />
+                                                <span class="fa fa-check" ng-show="innerForm.lastName.$valid" ng-hide="innerForm.lastName.$invalid || innerForm.lastName.$pristine"></span>                                                
                                             </label>
                                             <span class="error-container" ng-show="innerForm.lastName.$error.required"><i></i><label class="error">Please enter the Last Name</label></span>                                            
                                         </td>
-                                        <td class="phone-row" headers="phone-number-column" role="gridcell">
+                                        <td class="phone-column" headers="phone-number-column" role="gridcell">
                                             <label>
                                                 <strong>Phone Number</strong>
                                                 <span class="phone-container">
@@ -147,13 +159,13 @@
                                                 </span>
                                             </label>
                                         </td>
-                                        <td class="street-address-row" headers="street-address-column" role="gridcell">
+                                        <td class="street-address-column" headers="street-address-column" role="gridcell">
                                             <label>
                                                 <strong>Street Address</strong>
                                                 <input type="text" class="form-control" ng-model="customerDetail.streetAddress" name="streetAddress" />
                                             </label>
                                         </td>
-                                        <td class="save-row" headers="save-column" role="gridcell">
+                                        <td class="save-column" headers="save-column" role="gridcell">
                                             <button class="btn btn-success save-button" type="button" ng-disabled="innerForm.$pristine" ng-click="innerForm.$valid && save($index)"><i class="fa fa-check"></i></button>
                                         </td>
                                     </tr>
@@ -176,7 +188,7 @@
     </div>
     <footer class="col-xs-12">
         <p>Example project of a single page app utilizing AngularJS, allowing a user to view, add, edit and delete user information with data persistence.</p>
-        <p>Written by <a href='mailto:&#109;&#097;&#116;&#116;&#046;&#114;&#111;&#115;&#101;&#046;&#101;&#109;&#097;&#105;&#108;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;?&#115;&#117;&#098;&#106;&#101;&#099;&#116;=&#072;&#101;&#108;&#108;&#111;%&#049;&#048;&#077;&#114;&#046;%&#050;&#048;&#084;&#104;&#111;&#109;&#112;&#115;&#111;&#110;&#038;&#098;&#111;&#100;&#121;=&#085;&#103;&#103;&#103;&#104;%&#050;&#048;&#078;&#111;&#119;%&#050;&#048;&#119;&#104;&#101;&#110;%&#050;&#048;&#073;%&#050;&#048;&#115;&#097;&#121;%&#050;&#048;"&#072;&#101;&#108;&#108;&#111;%&#050;&#048;&#077;&#114;&#046;%&#050;&#048;&#084;&#104;&#111;&#109;&#112;&#115;&#111;&#110;"%&#050;&#048;&#097;&#110;&#100;%&#050;&#048;&#112;&#114;&#101;&#115;&#115;%&#050;&#048;&#100;&#111;&#119;&#110;%&#050;&#048;&#111;&#110;%&#050;&#048;&#121;&#111;&#117;&#114;%&#050;&#048;&#102;&#111;&#111;&#116;,%&#050;&#048;&#121;&#111;&#117;%&#050;&#048;&#115;&#109;&#105;&#108;&#101;%&#050;&#048;&#097;&#110;&#100;%&#050;&#048;&#110;&#111;&#100;'>Matt Rose</a></p>
+        <p>Written by <a href="mailto:&#109;&#097;&#116;&#116;&#046;&#114;&#111;&#115;&#101;&#046;&#101;&#109;&#097;&#105;&#108;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;?&#115;&#117;&#098;&#106;&#101;&#099;&#116;=&#072;&#101;&#108;&#108;&#111;%&#049;&#048;&#077;&#114;&#046;%&#050;&#048;&#084;&#104;&#111;&#109;&#112;&#115;&#111;&#110;&#038;&#098;&#111;&#100;&#121;=&#085;&#103;&#103;&#103;&#104;%&#050;&#048;&#078;&#111;&#119;%&#050;&#048;&#119;&#104;&#101;&#110;%&#050;&#048;&#073;%&#050;&#048;&#115;&#097;&#121;%&#050;&#048;'&#072;&#101;&#108;&#108;&#111;%&#050;&#048;&#077;&#114;&#046;%&#050;&#048;&#084;&#104;&#111;&#109;&#112;&#115;&#111;&#110;'%&#050;&#048;&#097;&#110;&#100;%&#050;&#048;&#112;&#114;&#101;&#115;&#115;%&#050;&#048;&#100;&#111;&#119;&#110;%&#050;&#048;&#111;&#110;%&#050;&#048;&#121;&#111;&#117;&#114;%&#050;&#048;&#102;&#111;&#111;&#116;,%&#050;&#048;&#121;&#111;&#117;%&#050;&#048;&#115;&#109;&#105;&#108;&#101;%&#050;&#048;&#097;&#110;&#100;%&#050;&#048;&#110;&#111;&#100;">Matt Rose</a></p>
         <!-- if that mailto stuff doesn't make sense, this will probably help: https://www.youtube.com/watch?v=lfft9Jx9gJk -->
     </footer>
 </div>
