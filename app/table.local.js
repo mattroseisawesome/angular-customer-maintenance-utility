@@ -45,7 +45,6 @@ app.controller('customerAppController', ['$scope', function ($scope) {
             modified: false
         }
     ];
-    localStorage.setItem('customerDetails', JSON.stringify($scope.customerDetails));
     $scope.addNew = function (customerDetail) {
         $scope.customerDetails.push({
             'emailAddress' : customerDetail.emailAddress,
@@ -54,8 +53,16 @@ app.controller('customerAppController', ['$scope', function ($scope) {
             'phoneNumber' : customerDetail.phoneNumber,
             'streetAddress' : customerDetail.streetAddress
         });
-        $scope.PD = {};
         localStorage.setItem('customerDetails', JSON.stringify($scope.customerDetails));
+
+        /* reset values for the add user form upon successful submission */
+        $scope.customerDetail.emailAddress = null;
+        $scope.customerDetail.firstName = null;
+        $scope.customerDetail.lastName = null;
+        $scope.customerDetail.phoneNumber = null;
+        $scope.customerDetail.streetAddress = null;
+        $scope.addUser.$setPristine();
+        $scope.addUser.$setUntouched();
     };
 
     $scope.save = function (index) {
@@ -63,20 +70,12 @@ app.controller('customerAppController', ['$scope', function ($scope) {
         state[index] = $scope.customerDetails[index];
         localStorage.setItem('customerDetails', JSON.stringify(state));
     };
-    
-    $scope.remove = function () {
-        var newones = [];
-        angular.forEach($scope.customerDetails, function (customerDetail) {
-            if (!customerDetail.selected) {
-                newones.push(customerDetail);
-            }
-        });
-        $scope.customerDetails = newones;
-        localStorage.setItem('customerDetails', JSON.stringify($scope.customerDetails));
-    };
 
     $scope.report = function (customerDetail, index) {
         $scope.customerDetails[index].selected = !$scope.customerDetails[index].selected;
+        if ($scope.customerDetails[index].selected === true) {
+          $scope.customerTable.$setDirty();
+        }
     };
 
     $scope.checkAll = function () {
@@ -89,4 +88,15 @@ app.controller('customerAppController', ['$scope', function ($scope) {
             customerDetail.selected = $scope.selectedAll;
         });
     };
+    $scope.remove = function () {
+        var newones = [];
+        angular.forEach($scope.customerDetails, function (customerDetail) {
+            if (!customerDetail.selected) {
+                newones.push(customerDetail);
+            }
+        });
+        $scope.customerDetails = newones;
+        localStorage.setItem('customerDetails', JSON.stringify($scope.customerDetails));
+    };
+
 }]);

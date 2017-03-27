@@ -31,7 +31,7 @@
                                         <span class="fa fa-check" ng-show="addUser.emailAddress.$valid"></span>
                                     </span>
 
-                                    <label for="emailAddress" class="error-container" ng-show="addUser.emailAddress.$error && addUser.emailAddress.$touched" ng-hide="addUser.emailAddress.$valid || addUser.emailAddress.$pristine || addUser.emailAddress.$untouched" role="alert">
+                                    <label for="emailAddress" class="error-container" ng-show="addUser.emailAddress.$error.required && addUser.emailAddress.$touched || addUser.emailAddress.$invalid && addUser.emailAddress.$touched" ng-hide="addUser.emailAddress.$valid || addUser.emailAddress.$pristine || addUser.emailAddress.$untouched" role="alert">
                                         <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                                         <span ng-show="addUser.emailAddress.$error.required" class="error">Email Address is required.</span>
                                         <span ng-show="addUser.emailAddress.$invalid" class="error">Please enter a valid Email Address.</span>
@@ -44,16 +44,16 @@
                                     <input type="text" class="form-control" ng-model="customerDetail.firstName" ng-minlength="2" name="firstName" id="firstName" aria-required="true" ng-required="true" required />
                                     <span class="fa fa-check" ng-show="addUser.firstName.$valid"></span>
 
-                                    
-                                    
-                                    <label for="firstName" class="error-container" ng-show="addUser.firstName.$error && addUser.firstName.$touched" ng-hide="addUser.firstName.$valid || addUser.firstName.$pristine || addUser.firstName.$untouched" role="alert">
+
+
+                                    <label for="firstName" class="error-container" ng-show="addUser.firstName.$error && addUser.firstName.$touched || addUser.firstName.$min && addUser.firstName.$touched" ng-hide="addUser.firstName.$valid || addUser.firstName.$pristine || addUser.firstName.$untouched" role="alert">
                                         <i class="fa fa-exclamation-circle"></i>
-                                        <span ng-show="addUser.firstName.$error.required" class="error">First Name is Required</span>
+                                        <span ng-show="addUser.firstName.$error.required" class="error">First Name is required</span>
                                         <span ng-show="addUser.firstName.$error.minlength" class="error">You must enter at least 2 characters</span>
                                     </label>
 
-                                
-                                
+
+
                                 </div>
                             </div>
                             <div class="controls">
@@ -73,16 +73,16 @@
                                 <div>
                                     <span class="phone-container">
                                         <i class="fa fa-phone" aria-hidden="true"></i>
-                                        <input type="text" class="form-control" placeholder="ex. 800-555-2638" ng-model="customerDetail.phoneNumber" id="phoneNumber" name="phoneNumber" aria-required="false" ng-required="false" /> 
+                                        <input type="text" class="form-control" placeholder="ex. 800-555-2638" ng-model="customerDetail.phoneNumber" id="phoneNumber" name="phoneNumber" aria-required="false" ng-required="false" />
                                     </span>
-                                </div>                                 
+                                </div>
                             </div>
                             <div class="controls">
                                 <label for="streetAddress" class="control-label">Street Address:</label>
                                 <div>
                                     <input type="text" class="form-control" placeholder="ex. 123 Street Ln" ng-model="customerDetail.streetAddress" id="streetAddress" name="streetAddress" aria-required="false" ng-required="false" />
-                                </div>                                 
-                            </div>                            
+                                </div>
+                            </div>
                             <div class="clearfix">
                                    <span ng-show="addUser.$pristine || addUser.$invalid">
                                     <button type="submit" class="btn btn-primary disabled addnew" disabled>
@@ -128,7 +128,7 @@
                                                     <span class="fa fa-check" ng-show="innerForm.emailAddress.$valid" ng-hide="innerForm.emailAddress.$invalid || innerForm.emailAddress.$pristine"></span>
                                                 </span>
                                             </label>
-                                            <label class="error-container" ng-show="innerForm.emailAddress.$invalid && innerForm.emailAddress.$touched" ng-hide="innerForm.emailAddress.$valid || innerForm.emailAddress.$untouched" role="alert">
+                                            <label class="error-container" ng-show="innerForm.emailAddress.$invalid && innerForm.emailAddress.$touched || innerForm.emailAddress.$error.required && innerForm.emailAddress.$touched" ng-hide="innerForm.emailAddress.$valid || innerForm.emailAddress.$untouched" role="alert">
                                                 <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                                                 <span ng-show="innerForm.emailAddress.$error.required" class="error">Email Address is required.</span>
                                                 <span ng-show="innerForm.emailAddress.$invalid" class="error">Please enter a valid Email Address.</span>
@@ -137,18 +137,26 @@
                                         <td class="first-name-column" headers="first-name-column" role="gridcell">
                                             <label>
                                                 <strong>First Name</strong>
-                                                <input type="text" class="form-control" ng-model="customerDetail.firstName" name="firstName" ng-required="true" />
+                                                <input type="text" class="form-control" ng-minlength="2" ng-model="customerDetail.firstName" name="firstName" ng-required="true" />
                                                 <span class="fa fa-check" ng-show="innerForm.firstName.$valid" ng-hide="innerForm.firstName.$invalid || innerForm.firstName.$pristine"></span>
                                             </label>
-                                            <span class="error-container" ng-show="innerForm.firstName.$error.required"><i></i><label class="error">Please enter the First Name</label></span>           
+                                            <span class="error-container" ng-show="innerForm.firstName.$error.required || innerForm.firstName.$invalid">
+                                              <i></i>
+                                              <label ng-show="innerForm.firstName.$error.required" class="error">Please enter the First Name</label>
+                                              <label ng-show="innerForm.firstName.$error.minlength" class="error">You must enter at least 2 characters</span>
+                                            </span>
                                         </td>
                                         <td class="last-name-column" headers="last-name-column" role="gridcell">
                                             <label>
                                                 <strong>Last Name</strong>
-                                                <input type="text" class="form-control" ng-model="customerDetail.lastName" name="lastName" ng-required="true" />
-                                                <span class="fa fa-check" ng-show="innerForm.lastName.$valid" ng-hide="innerForm.lastName.$invalid || innerForm.lastName.$pristine"></span>                                                
+                                                <input type="text" class="form-control" ng-minlength="2" ng-model="customerDetail.lastName" name="lastName" ng-required="true" />
+                                                <span class="fa fa-check" ng-show="innerForm.lastName.$valid" ng-hide="innerForm.lastName.$invalid || innerForm.lastName.$pristine"></span>
                                             </label>
-                                            <span class="error-container" ng-show="innerForm.lastName.$error.required"><i></i><label class="error">Please enter the Last Name</label></span>                                            
+                                            <span class="error-container" ng-show="innerForm.lastName.$error.required || innerForm.lastName.$error.minlength">
+                                              <i></i>
+                                              <label ng-show="innerForm.lastName.$error.required" class="error">Please enter the Last Name</label>
+                                              <label ng-show="innerForm.lastName.$error.minlength" class="error">You must enter at least 2 characters</label>
+                                            </span>
                                         </td>
                                         <td class="phone-column" headers="phone-number-column" role="gridcell">
                                             <label>
@@ -166,19 +174,15 @@
                                             </label>
                                         </td>
                                         <td class="save-column" headers="save-column" role="gridcell">
-                                            <button class="btn btn-success save-button" type="button" ng-disabled="innerForm.$pristine" ng-click="innerForm.$valid && save($index)"><i class="fa fa-check"></i></button>
+                                            <button class="btn btn-success save-button" type="button" ng-disabled="innerForm.$pristine" ng-click="innerForm.$valid && save($index); innerForm.$setPristine(); innerForm.$setUntouched()"><i class="fa fa-check"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>
                             </table>
 
                             <div class="form-group">
-                                <span ng-show="customerTable.$pristine">
-                                    <button type="button" class="btn btn-danger disabled" disabled><i class="fa fa-minus"></i> Remove Customer(s)</button> 
-                                </span>
-                                <span ng-show="customerTable.$dirty">
-                                    <button type="button" class="btn btn-danger" ng-click="remove()"><i class="fa fa-minus"></i> Remove Customer(s)</button> 
-                                </span>
+                              <button ng-show="customerTable.$pristine" type="button" class="btn btn-danger" disabled><i class="fa fa-minus"></i> Remove Customer(s)</button>
+                              <button ng-show="customerTable.$dirty" type="button" class="btn btn-danger" ng-click="remove()"><i class="fa fa-minus"></i> Remove Customer(s)</button>
                             </div>
                         </form>
                     </div>
