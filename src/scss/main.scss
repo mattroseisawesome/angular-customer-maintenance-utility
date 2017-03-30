@@ -1,358 +1,368 @@
 @import "_webfonts.scss";
 
-html,body{
-    font-weight:normal;
-    font-style:normal;
-    line-height:1.1275;
-    font-family:"Metropolis Regular", Arial, Helvetica, sans-serif;    
+html, body{
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1.1275;
+  font-family: "Metropolis Regular", Arial, Helvetica, sans-serif;
 }
 body{
-    background:rgb(255,255,255);
-    color:rgb(0,0,0);
-    min-height:100%;
-    padding:0 15px;
-    width:100%;
+  background: rgb(255,255,255);
+  color: rgb(0,0,0);
+  min-height: 100%;
+  padding: 0 15px;
+  width: 100%;
 }
 
 /*mixins*/
 .valid-fields{
-    background:rgba(92,184,92,.1);
-    border-color:rgba(76,174,76,.6);
+  background: rgba(92,184,92,.1);
+  border-color: rgba(76,174,76,.6);
+  transition: background 1.15s, border-color 1.15s;
 }
 .invalid-fields{
-    background:rgba(215,0,0,.1);
-    border-color:rgba(215,0,0,.3);
-    color:rgb(215,0,0);    
+  background: rgba(215,0,0,.1);
+  border-color: rgba(215,0,0,.3);
+  color: rgb(215,0,0);
+  transition: background 1.15s, border-color 1.15s, color 1.15s;
 }
 .font-reset{
-    font-weight: normal;
-    font-style: normal;
+  font-weight: normal;
+  font-style: normal;
 }
 .i-am-valid{
-    color:green;
-    display:block;
-    font-size:20px;
-    height:20px;
-    position:absolute;
-    top:30px;
-    right:5px;
-    width:20px;
+  color: green;
+  display: block;
+  font-size: 20px;
+  height: 20px;
+  position: absolute;
+  top: 30px;
+  right: 5px;
+  width: 20px;
 }
-
-
-
 #parent{
-    height:100%;
+  height: 100%;
 }
 header{
-    background: rgb(51,122,183);
-    border-bottom: 1px solid rgba(0,0,0,.35);
+  background: rgb(51,122,183);
+  border-bottom: 1px solid rgba(0,0,0,.35);
+  color: rgb(255,255,255);
+  text-shadow:1px 1px 2px rgba(0,0,0,.35);
+}
+
+#messages{
+  background: rgba(0,150,0,.9);
+  border: 1px solid rgba(255,255,255,.95);
+  border-radius: .36em;
+  box-sizing: border-box;
+  box-shadow: .36em -.36em .36em rgba(0,0,0,.125), -.36em .36em .36em rgba(0,0,0,.125), .36em .36em .36em rgba(0,0,0,.125);
+  display: flex;
+  height: 4em;
+  opacity: 1;
+  position: fixed;
+  top: 40%;
+  left: 40%;
+  text-shadow: 1px 1px rgba(0,0,0,.25);
+  width: 20em;
+  z-index: 9999;
+  p {
+    @extend .font-reset;
     color: rgb(255,255,255);
-    text-shadow:1px 1px 2px rgba(0,0,0,.35);
+    font-size: 1em;
+    flex-flow: column;
+    align-self: center;
+    text-align: center;
+    width: 100%;
+  }
+  i {
+    color: rgb(255,255,255);
+    font-size: 2em;
+    position: absolute;
+    top: .3em;
+    left: .3em;
+  }
 }
 
 h1{
-    font-family:"Metropolis Black";
-    font-size:2em;
-    font-variant-caps: small-caps;
-    line-height:2em;
-    margin:0;
-    padding:0;
+  font-family: "Metropolis Black";
+  font-size: 2em;
+  font-variant-caps: small-caps;
+  line-height: 2em;
+  margin: 0;
+  padding: 0;
 }
 
 h2{
-    font-family: "Metropolis Black";
-    font-size:1.6em;
-    font-variant-caps: small-caps;
-    line-height:1.24em;
-    margin:0;
-    padding:0 0 .6em;
+  font-family: "Metropolis Black";
+  font-size: 1.6em;
+  font-variant-caps: small-caps;
+  line-height: 1.24em;
+  margin: 0;
+  padding: 0 0 .6em;
 }
 
 #content{
-    padding-top:1.5em;
-    padding-bottom:1.5em;
+  padding-top: 1.5em;
+  padding-bottom: 1.5em;
+  z-index: 9999;
 }
 
 p{
-    font-family: "Metropolis Medium";
+  font-family: "Metropolis Medium";
 }
 label{
-    font-family:"Metropolis Semibold";
-    font-size:1em;
-    @extend .font-reset;
+  font-family:"Metropolis Semibold";
+  font-size: 1em;
+  @extend .font-reset;
 }
 strong{
-    font-family:"Metropolis Bold";
-    font-size:1.16em;
-    @extend .font-reset;
+  font-family: "Metropolis Bold";
+  font-size: 1.16em;
+  @extend .font-reset;
 }
 
 #field-validation{
-    background:rgb(245,245,245);
-    border:1px solid rgb(225,225,225);
-    border-radius:5px;
-    padding:1em 0;
+  background: rgb(245,245,245);
+  border: 1px solid rgb(225,225,225);
+  border-radius: 5px;
+  padding: 1em 0;
 }
 
 .optional-field{
-    font-family:"Metropolis Regular";
-    @extend .font-reset;
-    color:rgb(125,125,125);
+  font-family: "Metropolis Regular";
+  @extend .font-reset;
+  color: rgb(125,125,125);
 }
 
 .customers{
-    padding:0;
+  padding: 0;
+  li{
+    font-size: 1.24em;
+    list-style: none;
+    line-height: 1.36em;
+    padding: 10px 0 0;
+  }
 }
-
-.customers li{
-    list-style:none;
-    padding:10px 0 0;
-    font-size:1.24em;
-    line-height:1.36em;
-}
-
 
 .controls{
-    padding-bottom:10px;
-    position:relative;
-    overflow:hidden;
-    input{
-        &.ng-invalid.ng-touched{
-            @extend .invalid-fields;
-        }
-        &.ng-valid.ng-touched.ng-dirty{
-            @extend .valid-fields;
-        }        
+  overflow: hidden;
+  padding-bottom: 10px;
+  position: relative;
+  input{
+    &.ng-invalid.ng-touched{
+      @extend .invalid-fields;
     }
-    .fa.fa-check{
-        color:green;
-        display:block;
-        font-size:20px;
-        height:20px;
-        position:absolute;
-        top:30px;
-        right:5px;
-        width:20px;
+    &.ng-valid.ng-touched.ng-dirty{
+      @extend .valid-fields;
     }
+  }
 }
+
 input{
-    &.form-control{
-        font-family:"Metropolis Regular";
+  &.form-control{
+    font-family: "Metropolis Regular";
+  }
+  &.error,&.ng-invalid{
+    @extend .invalid-fields;
+  }
+  &.ng-valid.ng-touched{
+    @extend .valid-fields;
+  }
+  &.ng-pristine, &.ng-pristine.ng-touched{
+    background: rgb(255,255,255);
+    border-color: rgb(204,204,204);
+  }
+  &.ng-valid + .fa.fa-check{
+    @extend .i-am-valid;
+    opacity: 1;
+    transition: opacity 1.15s;
+  }
+  &.ng-pristine, &.ng-invalid{
+    & + .fa.fa-check{
+      opacity: 0;
+      position: absolute;
     }
-
-    &.error,&.ng-invalid{
-        @extend .invalid-fields;
-    }
-
-    &.ng-valid.ng-touched{
-        @extend .valid-fields;
-    }
-    &.ng-pristine,&.ng-pristine.ng-touched{
-        background:white;
-        border-color:rgb(204,204,204);
-    }
-    
+  }
 }
-
 
 i.required{
-    color:rgb(215,0,0);
-    font-size:.66em;
+  color: rgb(215,0,0);
+  font-size: .66em;
 }
-
 .error-container{
-    background:rgb(215,0,0);
-    border-radius:3px;
-    box-shadow:2px 2px 4px rgba(0,0,0,.175),-2px 2px 4px rgba(0,0,0,.175);
-    color:rgb(255,255,255);
-    display:inline-block;
-    font-size:.78em;
-    margin:10px 0 10px 3px;
-    padding:5px 15px 5px 30px;
-    position:relative;
-    width:97%;
-    vertical-align: middle;
-    & i:before{
-        position:absolute;
-        top: 3px;
-        left:3px;
-    }
-    & i::after{
-        content:"";
-        background:transparent;
-        border-left: 7px solid transparent;
-        border-right: 7px solid transparent;
-        border-top: 7px solid transparent;
-        border-bottom: 7px solid rgb(215, 0, 0);
-        display: block;
-        height: 7px;
-        position: absolute;
-        top: -18px;
-        left: 7px;
-        width: 7px;
+  background: rgb(215,0,0);
+  border-radius: 3px;
+  box-shadow: 2px 2px 4px rgba(0,0,0,.175), -2px 2px 4px rgba(0,0,0,.175);
+  color: rgb(255,255,255);
+  display: inline-block;
+  font-size: .78em;
+  margin: 10px 0 10px 3px;
+  padding: 5px 15px 5px 30px;
+  position: relative;
+  width: 97%;
+  vertical-align: middle;
+  & i:before{
+    position: absolute;
+    top: 3px;
+    left:3px;
+  }
+  & i::after{
+    content: "";
+    background: transparent;
+    border-left: 7px solid transparent;
+    border-right: 7px solid transparent;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid rgb(215, 0, 0);
+    display: block;
+    height: 7px;
+    position: absolute;
+    top: -18px;
+    left: 7px;
+    width: 7px;
+  }
+  & span{
+    display: block;
+  }
 
-    }
-
-
-    & span{
-        display:block;
-    }
-
-    & i{
-        content:"\f06a";
-        display:inline-block;
-        font-family:"FontAwesome";
-        font-size:1.12em;
-        @extend .font-reset;
-        height:10px;
-        position:absolute;
-        top:4px;
-        left:6px;
-        width:10px;
-    }
+  & i{
+    content: "\f06a";
+    display: inline-block;
+    font-family: "FontAwesome";
+    font-size: 1.12em;
+    @extend .font-reset;
+    height: 10px;
+    position: absolute;
+    top: 4px;
+    left: 6px;
+    width: 10px;
+  }
 }
 
 td label{
-    position:relative;
-    & .ng-valid + .fa.fa-check{
-        @extend .i-am-valid;
-        font-size:13px;
-        top:10px;
-        right:0;
-    }
+  position: relative;
+  & .ng-valid + .fa.fa-check{
+    @extend .i-am-valid;
+    font-size: 13px;
+    top: 10px;
+    right: 0;
+  }
 }
 
 .error{
-    text-shadow:1px 1px 1px rgba(0,0,0,.5);
-    margin-bottom:0;
-    font-size:1em;
-    line-height:1.36em;
+  font-size: 1em;
+  line-height: 1.36em;
+  margin-bottom: 0;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.5);
 }
 
-
-
-
-
-
-.email-container,.phone-container{
-    display:block;
-    overflow:hidden;
+.email-container, .phone-container{
+    display: block;
+    overflow: hidden;
     & i{
-    background-color:rgb(244,244,244);
-    border-width:1px 0 1px 1px;
-    border-style:solid;
-    border-color:rgb(204,204,204);
-    border-radius:4px 0 0 4px;
-    color:rgb(174,174,174);
-    display:block;
-    float:left;
-    font-size:20px;
-    width:34px;
-    height:34px;
+    background-color: rgb(244,244,244);
+    border-width: 1px 0 1px 1px;
+    border-style: solid;
+    border-color: rgb(204,204,204);
+    border-radius: 4px 0 0 4px;
+    color: rgb(174,174,174);
+    display: block;
+    float: left;
+    font-size: 20px;
+    width: 34px;
+    height: 34px;
     text-align: center;
     vertical-align: middle;
     }
-
     & input{
-        border-radius:0 4px 4px 0;
-        float:left;
-        width:calc(100% - 34px);
+      border-radius: 0 4px 4px 0;
+      float: left;
+      width: calc(100% - 34px);
     }
 }
 
-
 .email-container i{
-    line-height:28px;
+  line-height: 28px;
 }
 
 .phone-container i{
-    line-height:32px;
+  line-height: 32px;
 }
-
-
-
 
 //ugh i hate doing things like this
 .checkbox-column{
-    width:3%;
+  width: 3%;
 }
 .email-column{
-    width:24%;
+  width: 24%;
 }
 .first-name-column{
-    width:15%;
+  width: 15%;
 }
 .last-name-column{
-    width:15%;
+  width: 15%;
 }
 .phone-column{
-    width:20%;
+  width: 20%;
 }
 .street-address-column{
-    width:20%;
+  width: 20%;
 }
 .save-column{
-    width:5%;
+  width: 5%;
 }
 
-
-
-
 .btn.btn-primary{
-    font-family:"Metropolis Bold";
-    text-transform: uppercase;
-    @extend .font-reset;
+  font-family: "Metropolis Bold";
+  text-transform: uppercase;
+  @extend .font-reset;
 }
 
 #parent footer{
-    background:rgb(245,245,245);
-    border-top:1px solid rgb(0,0,0);
-    color:rgb(0,0,0);
-    min-height:200px;
-    padding-top:25px;
+  background: rgb(245,245,245);
+  border-top: 1px solid rgb(0,0,0);
+  color: rgb(0,0,0);
+  min-height: 200px;
+  padding-top: 25px;
 }
 
-@media (min-width:500px){
-    html,body{
-        font-size:11px;
-    }
-    thead{
-        display:none;
-    }
-    .email-container i,.phone-container i{
-        display:none;
-    }
-    .email-column strong,.first-name-column strong,.last-name-column strong,.phone-column strong,.street-address-column strong{
-        display:block;
-    }
-    .email-container input,.phone-container input{
-        width:100%;
-    }
+@media (min-width: 500px) {
+  html,body{
+    font-size: 11px;
+  }
+  thead{
+    display: none;
+  }
+  .email-container i, .phone-container i{
+    display: none;
+  }
+  .email-column strong, .first-name-column strong, .last-name-column strong, .phone-column strong, .street-address-column strong{
+    display: block;
+  }
+  .email-container input, .phone-container input{
+    width: 100%;
+  }
 }
-    
-@media (min-width:760px){
-    thead{
-        display:table-header-group;
-    }
-    .email-column strong,.first-name-column strong,.last-name-column strong,.phone-column strong,.street-address-column strong{
-        display:none;
-    }
-    .email-container i,.phone-container i{
-        display:block;
-    }
-    .email-container input,.phone-container input{
-        width:calc(100% - 34px);
-    }
+@media (min-width: 760px) {
+  thead{
+    display:table-header-group;
+  }
+  .email-column strong, .first-name-column strong, .last-name-column strong, .phone-column strong, .street-address-column strong{
+    display:none;
+  }
+  .email-container i, .phone-container i{
+    display:block;
+  }
+  .email-container input, .phone-container input{
+    width:calc(100% - 34px);
+  }
 }
-@media (min-width: 1026px){
-    html,body{
-        font-size:13px;
-    }
+@media (min-width: 1026px) {
+  html, body{
+    font-size: 13px;
+  }
 }
-
-@media (min-width:1300px){
-    html,body{
-        font-size:16px;
-    }    
+@media (min-width:1300px) {
+  html, body{
+    font-size: 16px;
+  }
 }

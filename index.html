@@ -28,7 +28,7 @@
                                     <span class="email-container">
                                         <i class="fa fa-envelope-o" aria-hidden="true"></i>
                                         <input type="email" class="form-control" placeholder="ex. john.jones@mars.pl" name="emailAddress" id="emailAddress" ng-model="customerDetail.emailAddress" aria-required="true" ng-required="true" required />
-                                        <span class="fa fa-check" ng-show="addUser.emailAddress.$valid"></span>
+                                        <span class="fa fa-check"></span>
                                     </span>
 
                                     <label for="emailAddress" class="error-container" ng-show="addUser.emailAddress.$error.required && addUser.emailAddress.$touched || addUser.emailAddress.$invalid && addUser.emailAddress.$touched" ng-hide="addUser.emailAddress.$valid || addUser.emailAddress.$pristine || addUser.emailAddress.$untouched" role="alert">
@@ -42,26 +42,20 @@
                                 <label for="firstName" class="control-label">First Name: <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
                                 <div>
                                     <input type="text" class="form-control" ng-model="customerDetail.firstName" ng-minlength="2" name="firstName" id="firstName" aria-required="true" ng-required="true" required />
-                                    <span class="fa fa-check" ng-show="addUser.firstName.$valid"></span>
-
-
-
-                                    <label for="firstName" class="error-container" ng-show="addUser.firstName.$error && addUser.firstName.$touched || addUser.firstName.$min && addUser.firstName.$touched" ng-hide="addUser.firstName.$valid || addUser.firstName.$pristine || addUser.firstName.$untouched" role="alert">
+                                    <span class="fa fa-check"></span>
+                                    <label for="firstName" class="error-container" ng-show="addUser.firstName.$error.required && addUser.firstName.$touched || addUser.firstName.$error.minlength && addUser.firstName.$touched" ng-hide="addUser.firstName.$valid || addUser.firstName.$pristine || addUser.firstName.$untouched" role="alert">
                                         <i class="fa fa-exclamation-circle"></i>
                                         <span ng-show="addUser.firstName.$error.required" class="error">First Name is required</span>
                                         <span ng-show="addUser.firstName.$error.minlength" class="error">You must enter at least 2 characters</span>
                                     </label>
-
-
-
                                 </div>
                             </div>
                             <div class="controls">
                                 <label for="lastName" class="control-label">Last Name: <i class="fa fa-asterisk required" aria-hidden="true"></i></label>
                                 <div>
                                     <input type="text" class="form-control" ng-model="customerDetail.lastName" ng-minlength="2" name="lastName" id="lastName" aria-required="true" ng-required="true" required />
-                                    <span class="fa fa-check" ng-show="addUser.lastName.$valid"></span>
-                                    <label for="lastName" class="error-container" ng-show="addUser.lastName.$error && addUser.lastName.$touched" ng-hide="addUser.lastName.$valid || addUser.lastName.$pristine || addUser.lastName.$untouched" role="alert">
+                                    <span class="fa fa-check"></span>
+                                    <label for="lastName" class="error-container" ng-show="addUser.lastName.$error.required && addUser.lastName.$touched || adduser.lastName.$error.minlength && addUser.lastName.$touched" ng-hide="addUser.lastName.$valid || addUser.lastName.$pristine || addUser.lastName.$untouched" role="alert">
                                         <i class="fa fa-exclamation-circle"></i>
                                         <span ng-show="addUser.lastName.$error.required" class="error">Last Name is required.</span>
                                         <span ng-show="addUser.lastName.$error.minlength" class="error">You must enter at least 2 characters.</span>
@@ -84,17 +78,12 @@
                                 </div>
                             </div>
                             <div class="clearfix">
-                                   <span ng-show="addUser.$pristine || addUser.$invalid">
-                                    <button type="submit" class="btn btn-primary disabled addnew" disabled>
-                                        <i class="fa fa-plus" aria-hidden="true"></i> Add New Customer
-                                    </button>
-                                </span>
-                                <span ng-show="addUser.$dirty && addUser.$valid">
-                                    <button type="submit" class="btn btn-primary addnew">
-                                        <i class="fa fa-plus" aria-hidden="true"></i> Add New Customer
-                                    </button>
-                                </span>
-
+                              <button ng-show="addUser.$pristine || addUser.$invalid" type="submit" class="btn btn-primary disabled addnew" disabled>
+                                  <i class="fa fa-plus" aria-hidden="true"></i> Add New Customer
+                              </button>
+                              <button ng-show="addUser.$dirty && addUser.$valid" type="submit" class="btn btn-primary addnew" ng-click="display()">
+                                  <i class="fa fa-plus" aria-hidden="true"></i> Add New Customer
+                              </button>
                             </div>
                         </form>
                     </div>
@@ -174,7 +163,7 @@
                                             </label>
                                         </td>
                                         <td class="save-column" headers="save-column" role="gridcell">
-                                            <button class="btn btn-success save-button" type="button" ng-disabled="innerForm.$pristine" ng-click="innerForm.$valid && save($index); innerForm.$setPristine(); innerForm.$setUntouched()"><i class="fa fa-check"></i></button>
+                                            <button class="btn btn-success save-button" type="button" ng-disabled="innerForm.$pristine" ng-click="innerForm.$valid && save($index); innerForm.$setPristine(); innerForm.$setUntouched(); display()"><i class="fa fa-check"></i></button>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -182,7 +171,7 @@
 
                             <div class="form-group">
                               <button ng-show="customerTable.$pristine" type="button" class="btn btn-danger" disabled><i class="fa fa-minus"></i> Remove Customer(s)</button>
-                              <button ng-show="customerTable.$dirty" type="button" class="btn btn-danger" ng-click="remove()"><i class="fa fa-minus"></i> Remove Customer(s)</button>
+                              <button ng-show="customerTable.$dirty" type="button" class="btn btn-danger" ng-click="remove(); display()"><i class="fa fa-minus"></i> Remove Customer(s)</button>
                             </div>
                         </form>
                     </div>
@@ -195,8 +184,10 @@
         <p>Written by <a href="mailto:&#109;&#097;&#116;&#116;&#046;&#114;&#111;&#115;&#101;&#046;&#101;&#109;&#097;&#105;&#108;&#064;&#103;&#109;&#097;&#105;&#108;&#046;&#099;&#111;&#109;?&#115;&#117;&#098;&#106;&#101;&#099;&#116;=&#072;&#101;&#108;&#108;&#111;%&#049;&#048;&#077;&#114;&#046;%&#050;&#048;&#084;&#104;&#111;&#109;&#112;&#115;&#111;&#110;&#038;&#098;&#111;&#100;&#121;=&#085;&#103;&#103;&#103;&#104;%&#050;&#048;&#078;&#111;&#119;%&#050;&#048;&#119;&#104;&#101;&#110;%&#050;&#048;&#073;%&#050;&#048;&#115;&#097;&#121;%&#050;&#048;'&#072;&#101;&#108;&#108;&#111;%&#050;&#048;&#077;&#114;&#046;%&#050;&#048;&#084;&#104;&#111;&#109;&#112;&#115;&#111;&#110;'%&#050;&#048;&#097;&#110;&#100;%&#050;&#048;&#112;&#114;&#101;&#115;&#115;%&#050;&#048;&#100;&#111;&#119;&#110;%&#050;&#048;&#111;&#110;%&#050;&#048;&#121;&#111;&#117;&#114;%&#050;&#048;&#102;&#111;&#111;&#116;,%&#050;&#048;&#121;&#111;&#117;%&#050;&#048;&#115;&#109;&#105;&#108;&#101;%&#050;&#048;&#097;&#110;&#100;%&#050;&#048;&#110;&#111;&#100;">Matt Rose</a></p>
         <!-- if that mailto stuff doesn't make sense, this will probably help: https://www.youtube.com/watch?v=lfft9Jx9gJk -->
     </footer>
+    <div id="messages" ng-show="displaySuccess">
+      <i class="fa fa-check"></i>
+      <p>{{displayMessage}}</p>
+    </div>
 </div>
-
-
 </body>
 </html>
